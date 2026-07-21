@@ -1,0 +1,13 @@
+{
+  "name": "Carbonly — Carbon Choices",
+  "short_name": "Carbonly",
+  "description": "Understand everyday carbon choices with sourced comparisons.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f6f0",
+  "theme_color": "#102d26",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

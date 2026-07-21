@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102d26" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Carbonly" />
+    <title>Carbonly — Make every choice lighter</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#home" aria-label="Carbonly home"><span>◒</span>carbonly</a>
+      <nav><a class="active" href="#scanner">Scan</a><a href="#sprint">Sprint</a><a href="#impact">My impact</a><a href="#learn">Learn</a></nav>
+      <button class="install-button" id="install-button" hidden>Install app</button>
+    </header>
+    <main id="home">
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="kicker">BETTER CHOICES, MADE VISIBLE</p>
+          <h1>See the impact<br />behind <em>everyday things.</em></h1>
+          <p class="lede">Take a photo of a meal, product, or journey. Carbonly turns it into a clear carbon estimate—and shows you a lighter way forward.</p>
+          <div class="intro-actions"><a class="dark-button" href="#scanner">Scan something <span>↗</span></a><a class="quiet-link" href="#impact">See your footprint ↓</a></div>
+          <div class="trust-row"><span class="avatars"><i>⌁</i><i>✦</i><i>◎</i></span><p><strong>Published factors, clearly sourced.</strong> See how each estimate is made.</p></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a carbon scan">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="scan-card floating-card top-card"><span class="tiny-icon orange">♨</span><div><small>This month</small><strong id="hero-total">No choices logged</strong></div><b>Live total</b></div>
+          <div class="scan-window"><div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div><span class="leaf-illustration">✿</span><div class="scan-line"></div></div>
+          <div class="scan-card floating-card bottom-card"><span class="tiny-icon green">✓</span><div><small>Swap found</small><strong>Compare choices</strong></div><b>View →</b></div>
+        </div>
+      </section>
+
+      <section class="scanner-section" id="scanner">
+        <div class="section-intro"><p class="kicker">CARBON LENS</p><h2>What are you holding?</h2><p>Snap a photo or choose one from your library. Then confirm the item for a clear, useful estimate.</p></div>
+        <div class="scanner-layout">
+          <div class="camera-card" id="camera-card">
+            <div class="image-preview" id="image-preview"><div class="preview-placeholder"><span class="camera-symbol">⌑</span><strong>Point, snap, discover</strong><p>Your photo stays on this device.</p></div></div>
+            <label class="upload-button" for="photo-input"><span>⌑</span> Take photo or upload<input id="photo-input" type="file" accept="image/*" capture="environment" /></label>
+          </div>
+          <form class="identify-card" id="scan-form">
+          <p class="step-label"><span>1</span> Confirm what’s in the photo</p>
+            <label class="field-label" for="item-select">The photo shows</label>
+            <select id="item-select" required></select>
+            <div class="amount-row"><label class="field-label" for="item-amount">How much?</label><div><button class="amount-button" type="button" data-adjust="-1">−</button><input id="item-amount" value="1" min="1" max="1000" step="1" type="number" /><button class="amount-button" type="button" data-adjust="1">+</button></div><span id="amount-unit">meal</span></div>
+            <button class="scan-button" type="submit"><span>✦</span> Check carbon impact <b>→</b></button>
+            <p class="privacy-note">No account required. We only show estimates with a published source and unit.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="result-section hidden" id="result-section" aria-live="polite">
+        <div class="result-head"><div><p class="kicker">YOUR CARBON SNAPSHOT</p><h2 id="result-title">This choice has an impact.</h2></div><button class="close-result" id="close-result" aria-label="Close result">×</button></div>
+        <div class="result-grid">
+          <article class="impact-result"><div class="result-icon" id="result-icon">◌</div><p id="result-label">Your selected item</p><div class="number-line"><strong id="result-carbon">—</strong><span>kg<br />CO₂e</span></div><div class="score-line"><span>Impact rating</span><div class="rating-dots" id="rating-dots"></div><b id="rating-label">—</b></div><p class="result-context" id="result-context"></p><p class="result-source" id="result-source"></p><button id="log-choice" class="outline-button">Add to my footprint <span>+</span></button></article>
+          <article class="swap-result"><span class="swap-spark">✦</span><p class="kicker">A LIGHTER SWITCH</p><h3 id="swap-title">Try a lighter option</h3><p id="swap-copy">A small swap can make a meaningful difference.</p><div class="swap-compare"><div><span>Instead choose</span><strong id="swap-name">Vegetarian meal</strong></div><div><span>Its impact</span><strong id="swap-carbon">0.0 kg CO₂e</strong></div><b id="swap-saving">Save 0%</b></div><button id="log-swap" class="dark-button">Choose this swap <span>→</span></button></article>
+        </div>
+      </section>
+
+      <section class="impact-section" id="impact">
+        <div class="impact-top"><div><p class="kicker">YOUR CURRENT MONTH</p><h2>A lighter month, one choice at a time.</h2></div><div class="month-controls"><span id="month-label">Current month</span></div></div>
+        <div class="impact-dashboard">
+          <article class="footprint-card"><p>YOUR FOOTPRINT</p><strong id="month-total">0.00</strong><span>kg CO₂e</span><div class="goal-meter"><i id="goal-meter"></i></div><small id="goal-copy">Set a monthly target to see progress.</small><div class="goal-editor"><input id="goal-input" type="number" min="0.01" step="0.01" placeholder="Set kg target" aria-label="Monthly target in kilograms of carbon dioxide equivalent" /><button id="save-goal">Set</button></div></article>
+          <article class="breakdown-card"><div class="card-heading"><p>WHERE IT COMES FROM</p><span id="entry-count">0 choices</span></div><div class="breakdown-list" id="breakdown-list"></div></article>
+          <article class="streak-card"><span>✦</span><p>YOU’RE BUILDING A HABIT</p><strong id="streak-number">0</strong><small>lighter choices logged</small><div class="mini-leaves">● ● ● ○ ○</div></article>
+        </div>
+        <div class="history-card"><div class="card-heading"><div><p>RECENT CHOICES</p><h3>Every choice tells a story.</h3></div><button id="clear-history">Clear history</button></div><div id="history-list"></div></div>
+      </section>
+
+      <section class="sprint-section" id="sprint">
+        <div class="sprint-intro"><div><p class="kicker">THE 60-SECOND CARBON SPRINT</p><h2>Which choice lands lighter?</h2><p>Five quick comparisons. No guilt, no leaderboard—just the kind of pattern-spotting that makes everyday choices easier.</p></div><div class="personal-best"><span>YOUR BEST</span><strong id="best-score">—</strong><small>points</small></div></div>
+        <div class="sprint-game" id="sprint-game">
+          <div class="game-top"><div class="game-progress"><i id="game-progress"></i></div><span id="game-round">Round 1 of 5</span><span class="game-score"><b id="game-score">0</b> pts</span></div>
+          <div class="game-card" id="game-card"><p class="game-category" id="game-category">FOOD FACE-OFF</p><h3 id="game-question">Which has the lower average footprint for the same 100 g portion?</h3><div class="game-options" id="game-options"></div><p class="game-feedback" id="game-feedback" aria-live="polite">Pick the option you think is lighter.</p><button class="next-round" id="next-round" disabled>Next round <span>→</span></button></div>
+          <div class="game-footer"><span>✦ Every answer explains the “why”.</span><button id="restart-game">Start fresh</button></div>
+        </div>
+      </section>
+
+      <section class="learn-section" id="learn">
+        <p class="kicker">THE CARBONLY FIELD NOTES</p><h2>Useful climate knowledge,<br />without the lecture.</h2><p class="learn-lede">Every number in this app is an estimate, but not a guess. These short reads show what the evidence says—and where it has limits.</p>
+        <div class="featured-fact"><div><span>THE SURPRISING BIT</span><h3>Your plate usually matters more than its postcode.</h3><p>For the global food system, transport accounts for about 5% of emissions. What you eat is generally more important than how far it travelled.</p></div><a href="https://ourworldindata.org/environmental-impacts-of-food" target="_blank" rel="noreferrer">Read the evidence <b>↗</b></a></div>
+        <div class="knowledge-grid">
+          <article><span>01 · FOOD</span><h3>Beef and peas can be worlds apart.</h3><p>Global average life-cycle data puts beef from beef herds at 99.48 kg CO₂e per kg, and peas at 0.98 kg. The difference is mostly production and land use—not food miles.</p><a href="https://ourworldindata.org/grapher/ghg-per-kg-poore" target="_blank" rel="noreferrer">See the dataset ↗</a></article>
+          <article><span>02 · TRAVEL</span><h3>Distance matters. So does how you move.</h3><p>For UK travel, the 2026 reporting factors list 0.16591 kg CO₂e per km for an average petrol/diesel-unknown car, versus 0.03092 for national rail per passenger-km.</p><a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noreferrer">See the 2026 factors ↗</a></article>
+          <article><span>03 · POWER</span><h3>Electricity has a postcode too.</h3><p>Electricity emissions depend on the grid that makes it. The app’s electricity estimate uses the UK 2026 grid, transmission, and upstream factors; it is not a universal value.</p><a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noreferrer">How factors work ↗</a></article>
+          <article><span>04 · HONESTY</span><h3>A single “carbon score” can hide a lot.</h3><p>Farming impacts vary widely: the same food can differ by producer, location, and practices. Use the estimate to compare broad choices—not as a precise label for a specific brand.</p><a href="https://www.biology.ox.ac.uk/publication/854765/ora-hyrax" target="_blank" rel="noreferrer">Read the research ↗</a></article>
+          <article><span>05 · LANGUAGE</span><h3>What does CO₂e actually mean?</h3><p>Carbon dioxide equivalent combines gases with different warming effects into one number, using their warming effect over 100 years. It makes methane, nitrous oxide, and CO₂ comparable.</p><a href="https://ourworldindata.org/environmental-impacts-of-food" target="_blank" rel="noreferrer">Understand CO₂e ↗</a></article>
+          <article><span>06 · NEXT STEP</span><h3>Don’t chase perfect. Repeat the good.</h3><p>Choose the lower-impact option when it is practical, then repeat it. A tracker is most useful when it helps you notice patterns, not when it makes you feel judged.</p><a href="#scanner">Try a comparison ↗</a></article>
+        </div>
+        <div class="method-note"><div><p class="kicker">METHOD & SOURCES</p><h3>How Carbonly calculates.</h3></div><p>Food estimates use global life-cycle averages from Poore & Nemecek (2018), processed by Our World in Data. Travel and electricity estimates use the UK Government’s 2026 conversion-factor dataset. Values are presented with their source units and are not product-specific life-cycle assessments.</p><a href="https://ourworldindata.org/grapher/ghg-per-kg-poore" target="_blank" rel="noreferrer">Food source ↗</a><a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noreferrer">UK source ↗</a></div>
+      </section>
+    </main>
+    <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#scanner"><span>⌑</span>Scan</a><a href="#sprint"><span>✦</span>Sprint</a><a href="#impact"><span>◒</span>Impact</a><a href="#learn"><span>☰</span>Learn</a></nav>
+    <footer><a class="logo" href="#home"><span>◒</span>carbonly</a><p>Make the everyday a little lighter.</p><span>© 2026</span></footer>
+    <template id="history-template"><div class="history-item"><span class="history-icon"></span><div><strong></strong><small></small></div><time></time><b></b><button aria-label="Remove entry">×</button></div></template>
+    <script src="app.js"></script>
+  </body>
+</html>
